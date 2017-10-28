@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import {
-  ADD_CATEGORY,
-  REMOVE_CATEGORY,
+  REQUEST_CATEGORIES,
+  RECEIVE_CATEGORIES,
 } from '../actions'
 
 const initialCategoryState = {
@@ -9,19 +9,17 @@ const initialCategoryState = {
 
 }
 
-function category (state = initialCategoryState, action) {
-  const { category } = action
+function categories (state = initialCategoryState, action) {
+  const { categories } = action
 
   switch (action.type) {
-    case ADD_CATEGORY :
+    case REQUEST_CATEGORIES:
       return {
-        ...state,
-        category
+        ...state
       }
-    case REMOVE_CATEGORY :
+    case RECEIVE_CATEGORIES:
       return {
-        ...state,
-        category
+        categories
       }
     default :
       return state
@@ -30,5 +28,5 @@ function category (state = initialCategoryState, action) {
 
 
 export default combineReducers({
-  category,
+  categories,
 })

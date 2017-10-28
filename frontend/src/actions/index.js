@@ -6,8 +6,23 @@ export function addCategory({category}){
   }
 }
 
+export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
+export function requestCategories(){
+  return {
+    type: REQUEST_CATEGORIES,
+  }
+}
+
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+export function receiveCategories({categories}){
+  return {
+    type: RECEIVE_CATEGORIES,
+    categories
+  }
+}
+
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
-export function removeFromCalendar({category}){
+export function removeFromCalendar(category){
   return {
     type: REMOVE_CATEGORY,
     category,

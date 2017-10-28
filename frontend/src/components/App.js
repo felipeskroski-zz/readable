@@ -1,24 +1,55 @@
 import React, { Component } from 'react';
 import logo from '../assets/logo.svg';
-import '../assets/App.css';
 import { fetchCategories } from '../utils/api'
+import { connect } from 'react-redux'
+
 
 class App extends Component {
+  componentDidMount(){
+    const {requestCategories} = this.props
+    requestCategories()
+  }
+
+  renderCategories(){
+    const {categories} = this.props.categories
+    console.log('props')
+    console.log(categories)
+    if(categories){
+      return(
+        <ul>
+          {categories.map((c, index) => (
+            <li key={index}>{c.name}</li>
+          ))}
+        </ul>
+      )
+    }
+  }
 
   render() {
-    fetchCategories()
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>Categories</h1>
+        {this.renderCategories()}
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps ({ categories, posts }) {
+  return {
+    categories,
+    posts,
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    requestCategories: () => dispatch(fetchCategories()),
+    //remove: (data) => dispatch(removeFromCalendar(data))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
