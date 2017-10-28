@@ -1,11 +1,3 @@
-export const ADD_CATEGORY = 'ADD_CATEGORY'
-export function addCategory({category}){
-  return {
-    type: ADD_CATEGORY,
-    category
-  }
-}
-
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
 export function requestCategories(){
   return {
@@ -21,10 +13,16 @@ export function receiveCategories({categories}){
   }
 }
 
-export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
-export function removeFromCalendar(category){
+export const REQUEST_POSTS = 'REQUEST_POSTS'
+export function requestPosts(){
   return {
-    type: REMOVE_CATEGORY,
-    category,
+    type: REQUEST_POSTS
+  }
+}
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export function receivePosts(posts){
+  return {
+    type: RECEIVE_POSTS,
+    posts
   }
 }
