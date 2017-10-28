@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../assets/logo.svg';
+import {Link} from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../utils/api'
 import { connect } from 'react-redux'
-import Post from '../components/Post'
+import PostItem from '../components/PostItem'
 
 
 class Home extends Component {
@@ -28,7 +28,7 @@ class Home extends Component {
       const ordered = this.sortPosts(posts, this.state.orderBy)
       return(
           ordered.map((p, index) => (
-            <Post key={index} post={p}/>
+            <PostItem key={index} post={p} />
           ))
       )
     }
@@ -61,6 +61,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Link to='/newpost'>New Post</Link>
         <select name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
           <option value="voteScore">Votes</option>
           <option value="timestamp">Date</option>

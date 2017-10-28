@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
-const Post = ({ post }) => (
+const PostItem = ({ post }) => (
   <div>
-    <h3>{post.title}</h3>
+    <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
     <span>{post.author}</span>
     <p>{post.body}</p>
     <p>author: {post.author}</p>
@@ -12,4 +13,4 @@ const Post = ({ post }) => (
   </div>
 )
 
-export default Post
+export default PostItem

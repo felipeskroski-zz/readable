@@ -1,8 +1,9 @@
-import {requestCategories, receiveCategories, requestPosts, receivePosts,  } from '../actions'
+import {requestCategories, receiveCategories, requestPosts,
+  receivePosts, requestPost, receivePost, } from '../actions'
 const endpoint = 'http://localhost:3001'
 const headers = { headers: { 'Authorization': 'whatever-you-want' },credentials: 'include' }
 
-export function fetchCategories () {
+export function fetchCategories() {
   return dispatch => {
     const url = `${endpoint}/categories`
     console.log('fetching from url', url)
@@ -17,7 +18,7 @@ export function fetchCategories () {
   }
 }
 
-export function fetchPosts () {
+export function fetchPosts() {
   return dispatch => {
     const url = `${endpoint}/posts`
     console.log('fetching from url', url)
@@ -27,6 +28,21 @@ export function fetchPosts () {
       .then((data) => {
         console.log(data)
         dispatch(receivePosts(JSON.parse(data)))
+      }
+    )
+  }
+}
+
+export function fetchPost(id) {
+  return dispatch => {
+    const url = `${endpoint}/posts/${id}`
+    console.log('fetching from url', url)
+    dispatch(requestPost())
+    fetch(url, headers)
+      .then((res) => { return(res.text()) })
+      .then((data) => {
+        console.log(data)
+        dispatch(receivePost(JSON.parse(data)))
       }
     )
   }

@@ -19,10 +19,27 @@ export function requestPosts(){
     type: REQUEST_POSTS
   }
 }
+
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export function receivePosts(posts){
   return {
     type: RECEIVE_POSTS,
     posts
+  }
+}
+
+
+export const REQUEST_POST = 'REQUEST_POST'
+export function requestPost(){
+  return {
+    type: REQUEST_POST
+  }
+}
+
+export const RECEIVE_POST = 'RECEIVE_POST'
+export function receivePost(post){
+  return {
+    type: RECEIVE_POST,
+    post
   }
 }

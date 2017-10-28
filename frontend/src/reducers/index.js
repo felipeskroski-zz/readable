@@ -3,7 +3,9 @@ import {
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
   REQUEST_POSTS,
-  RECEIVE_POSTS
+  RECEIVE_POSTS,
+  REQUEST_POST,
+  RECEIVE_POST
 } from '../actions'
 
 
@@ -26,7 +28,7 @@ function categories (state = {}, action) {
 
 
 function posts (state = {}, action) {
-  const { posts } = action
+  const { posts, post } = action
   switch (action.type) {
     case REQUEST_POSTS:
       return {
@@ -34,8 +36,20 @@ function posts (state = {}, action) {
       }
     case RECEIVE_POSTS:
       return {
+        ...state,
         posts
       }
+    case REQUEST_POST:
+      return {
+        ...state,
+        selectedPost: false
+      }
+    case RECEIVE_POST:
+      return {
+        ...state,
+        selectedPost: post
+      }
+
     default :
       return state
   }
