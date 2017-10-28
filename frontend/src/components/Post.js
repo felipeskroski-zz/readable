@@ -8,6 +8,7 @@ const Post = ({ post }) => (
     <p>author: {post.author}</p>
     <p>votes: {post.voteScore}</p>
     <p>comments: {post.commentCount}</p>
+    <p>timestamp: {post.timestamp}</p>
   </div>
 )
 
