@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../assets/logo.svg';
 import { fetchCategories, fetchPosts } from '../utils/api'
 import { connect } from 'react-redux'
+import Post from './Post'
 
 
 class App extends Component {
@@ -17,18 +18,9 @@ class App extends Component {
     console.log(this.props)
     if(posts){
       return(
-
           posts.map((p, index) => (
-            <div key={index}>
-              <h3>{p.title}</h3>
-              <span>{p.author}</span>
-              <p>{p.body}</p>
-              <p>author: {p.author}</p>
-              <p>votes: {p.voteScore}</p>
-              <p>comments: {p.commentCount}</p>
-            </div>
+            <Post key={index} post={p}/>
           ))
-
       )
     }
   }
