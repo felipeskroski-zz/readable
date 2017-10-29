@@ -6,6 +6,7 @@ import {
   RECEIVE_POSTS,
   REQUEST_POST,
   RECEIVE_POST,
+  ADD_POST,
   VOTED_POST
 } from '../actions'
 
@@ -47,11 +48,16 @@ function posts (state = {}, action) {
         }
         return p
       })
+
       return {
         ...state,
         posts: updatedPosts
       };
-
+    case ADD_POST:
+      return {
+        ...state,
+        ...action.post
+      }
     default :
       return state
   }

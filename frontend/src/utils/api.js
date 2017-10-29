@@ -31,12 +31,16 @@ export const getPost = id =>
     headers
   }).then(res => res.json())
 
-export const addPost = post =>
-  fetch(`${endpoint}/posts`, {
+export const addPost = post =>{
+  console.log('addPost')
+  console.log(post)
+  return fetch(`${endpoint}/posts`, {
     method: "POST",
     headers,
     body: JSON.stringify(post)
-  }).then(data => data.json())
+  }).then(res => res.json())
+}
+
 
 export const editPost = (post, postId) =>
   fetch(`${endpoint}/posts/${postId}`, {
@@ -67,9 +71,6 @@ export const getComment = commentId =>
   fetch(`${endpoint}/comments/${commentId}`, { headers })
     .then(res => res.json().then(data => data))
 
-//
-//Comments
-//
 export const getComments = postId =>
   fetch(`${endpoint}/posts/${postId}/comments`, { headers })
   .then(res => res.json().then(data => data))

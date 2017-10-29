@@ -61,14 +61,26 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Link to='/newpost'>New Post</Link>
-        <select name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
-          <option value="voteScore">Votes</option>
-          <option value="timestamp">Date</option>
-        </select>
+        <div className='d-flex flex-row justify-content-between'>
+          <div>
+            <h1>Categories</h1>
+            {this.renderCategories()}
+          </div>
+          <div>
+            <Link to='/newpost' className="btn btn-primary" >New Post</Link>
+          </div>
+        </div>
 
-        <h1>Categories</h1>
-        {this.renderCategories()}
+        <div className='form-inline'>
+          <div className="form-group">
+            <label htmlFor="orderBy">Order by</label>
+            <select className="form-control" name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
+              <option value="voteScore">Votes</option>
+              <option value="timestamp">Date</option>
+            </select>
+          </div>
+        </div>
+
         {this.renderPosts()}
 
       </div>

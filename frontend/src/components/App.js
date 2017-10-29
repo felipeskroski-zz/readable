@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className='container'>
           <Route exact path="/" component={HomeView}/>
           <Route path="/newpost" component={NewPost}/>
           <Route path="/post/:id" component={Post}/>
