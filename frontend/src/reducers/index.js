@@ -11,7 +11,8 @@ import {
   EDIT_POST,
   VOTED_POST,
   REQUEST_COMMENTS,
-  GET_COMMENTS,
+  RECEIVE_COMMENTS,
+  VOTE_COMMENT,
 } from '../actions'
 
 
@@ -104,16 +105,30 @@ function selectedPost(state = {}, action) {
 }
 
 function comments(state = {}, action) {
+  const { post, comment } = action
   switch (action.type) {
     case REQUEST_COMMENTS:
       return {
         ...state,
         comments: false
       }
-    case GET_COMMENTS:
+    case RECEIVE_COMMENTS:
       return {
         ...state,
         comments: action.comments
+      }
+    case VOTE_COMMENT:
+      const updatedComments = state.comments.map(item => {
+        if (item.id === comment.id) {
+          item.voteScore = comment.voteScore
+        }
+        return item
+      })
+      console.log('VOTE_COMMENT')
+      console.log(updatedComments)
+      return {
+        ...state,
+        comments: updatedComments
       }
     default:
       return state

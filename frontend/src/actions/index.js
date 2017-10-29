@@ -111,15 +111,26 @@ export const editPost = post => ({
 
 //Get comments by post
 export const fetchComments = postId => dispatch =>
-  api.getComments(postId).then(comments => dispatch(getComments(comments)))
+  api.getComments(postId).then(comments => dispatch(receiveComments(comments)))
 
 export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
 export const requestComments = comments => ({
   type: REQUEST_COMMENTS,
 })
 
-export const GET_COMMENTS = 'GET_COMMENTS'
-export const getComments = comments => ({
-  type: GET_COMMENTS,
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const receiveComments = comments => ({
+  type: RECEIVE_COMMENTS,
   comments
+})
+
+//vote comment
+export const fetchVoteComment = (id, option) => dispatch =>
+  api.voteComment(id, option)
+    .then(comment => dispatch(voteComment(comment)))
+
+export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const voteComment = (comment) => ({
+  type: VOTE_COMMENT,
+  comment
 })

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchVotePost } from '../actions'
 
-const PostItem = ({ post, vote }) => (
+const PostItem = ({ post, posts, vote }) => (
   <div>
     <hr/>
     <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
@@ -17,6 +17,12 @@ const PostItem = ({ post, vote }) => (
   </div>
 )
 
+function mapStateToProps ({ posts }) {
+  return {
+    posts,
+  }
+}
+
 function mapDispatchToProps (dispatch) {
   return {
     vote: (id, option) => dispatch(fetchVotePost(id, option)),
@@ -24,6 +30,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(PostItem)

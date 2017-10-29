@@ -33,13 +33,13 @@ class Post extends Component {
   render(){
     const {selectedPost} =  this.props.selectedPost
     const {comments} = this.props.comments
+    console.log('post view')
     if(selectedPost){
       return(
         <div>
           <Link to='/'>Back</Link>
           <PostItem post={selectedPost} />
           <div className="btn-group">
-
             <Link to={`/post/edit/${selectedPost.id}`} className="btn btn-primary">Edit</Link>
             <button type="button"
               className="btn btn-outline-danger"
