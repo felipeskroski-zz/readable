@@ -8,6 +8,7 @@ import {
   RECEIVE_POST,
   ADD_POST,
   DELETE_POST,
+  EDIT_POST,
   VOTED_POST
 } from '../actions'
 
@@ -55,6 +56,11 @@ function posts (state = {}, action) {
         posts: updatedPosts
       };
     case ADD_POST:
+      return {
+        ...state,
+        ...action.post
+      }
+    case EDIT_POST:
       return {
         ...state,
         ...action.post

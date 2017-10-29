@@ -42,7 +42,7 @@ export const addPost = post =>{
 }
 
 
-export const editPost = (post, id) =>
+export const editPost = (id, post) =>
   fetch(`${endpoint}/posts/${id}`, {
     method: "PUT",
     headers,

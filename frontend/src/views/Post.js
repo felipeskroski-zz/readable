@@ -16,7 +16,7 @@ class Post extends Component {
 
   deletePost = id => {
     const {createPost, history, deletePost} = this.props
-    
+
     if(this.state.readyToDelete){
       deletePost(id)
       //Redirects to Home after deleting post.
@@ -35,7 +35,8 @@ class Post extends Component {
           <Link to='/'>Back</Link>
           <PostItem post={selectedPost} />
           <div className="btn-group">
-            <button type="button" className="btn btn-primary">Edit</button>
+
+            <Link to={`/post/edit/${selectedPost.id}`} className="btn btn-primary">Edit</Link>
             <button type="button"
               className="btn btn-outline-danger"
               onClick={() => this.deletePost(selectedPost.id)}>{this.state.readyToDelete ? 'Are you sure?' : 'Delete'}</button>

@@ -90,3 +90,14 @@ export const deletePost = id => ({
   type: DELETE_POST,
   id
 });
+
+
+// edit post
+export const fetchUpdatePost = (id, post) => dispatch =>
+  api.editPost(id, post).then(post => dispatch(editPost(post)))
+
+export const EDIT_POST = 'EDIT_POST'
+export const editPost = post => ({
+  type: EDIT_POST,
+  post
+})
