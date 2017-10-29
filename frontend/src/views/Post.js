@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchPost, fetchDeletePost, fetchComments } from '../actions'
 import PostItem from '../components/PostItem'
+import CommentItem from '../components/CommentItem'
 
 class Post extends Component {
 
@@ -17,7 +18,7 @@ class Post extends Component {
   }
 
   deletePost = id => {
-    const {createPost, history, deletePost} = this.props
+    const {history, deletePost} = this.props
 
     if(this.state.readyToDelete){
       deletePost(id)
@@ -44,7 +45,12 @@ class Post extends Component {
               className="btn btn-outline-danger"
               onClick={() => this.deletePost(selectedPost.id)}>{this.state.readyToDelete ? 'Are you sure?' : 'Delete'}</button>
           </div>
-          {comments && comments.map(c => <p>{c.body}</p> )}
+          {comments &&
+            <div>
+              <h3>Comments</h3>
+              {comments.map(c => <CommentItem comment={c} key={c.id} /> )}
+            </div>
+          }
         </div>
       )
     }else{

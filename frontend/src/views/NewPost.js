@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchNewPost } from "../actions";
-import serializeForm from 'form-serialize'
 import uuidv1 from "uuid/v1";
 
 const categories = [

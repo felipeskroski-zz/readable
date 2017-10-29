@@ -47,7 +47,7 @@ function posts (state = {}, action) {
       }
     case VOTED_POST:
       const updatedPosts = state.posts.map(p => {
-        if(p.id == post.id){
+        if(p.id === post.id){
           p.voteScore = post.voteScore
         }
         return p
@@ -68,7 +68,7 @@ function posts (state = {}, action) {
         ...action.post
       }
     case DELETE_POST:
-      const remainingPosts = state.posts.filter(p => (p.id != id))
+      const remainingPosts = state.posts.filter(p => (p.id !== id))
       console.log('DELETE_POST')
       console.log(remainingPosts)
       return {

@@ -6,10 +6,7 @@ import Post from '../views/Post'
 import EditPost from '../views/EditPost'
 
 //Page routes
-const HomeView = () =>(<Home/>)
-const NewPostView = () =>(<NewPost/>)
-const PostView = () =>(<Post/>)
-const EditPostView = () =>(<EditPost/>)
+//const HomeView = () =>(<Home/>)
 
 class App extends Component {
 
