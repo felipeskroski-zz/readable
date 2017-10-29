@@ -11,8 +11,12 @@ class Post extends Component {
     readyToDelete: false
   }
   componentDidMount(){
-    const {requestPost, requestComments} = this.props
+    const {requestPost, requestComments, posts} = this.props
     const {id} = this.props.match.params
+    //if this is the first page to load fetch posts for state
+    if(posts === {}){
+      requestPosts()
+    }
     requestPost(id)
     requestComments(id)
   }
@@ -63,8 +67,9 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({ selectedPost, comments }) {
+function mapStateToProps ({ posts, selectedPost, comments }) {
   return {
+    posts,
     selectedPost,
     comments,
   }
@@ -72,6 +77,7 @@ function mapStateToProps ({ selectedPost, comments }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    requestPosts: () => dispatch(fetchPosts()),
     requestPost: id => dispatch(fetchPost(id)),
     deletePost: id => dispatch(fetchDeletePost(id)),
     requestComments: id => dispatch(fetchComments(id)),
