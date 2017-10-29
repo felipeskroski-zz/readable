@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchPost, fetchDeletePost, fetchComments } from '../actions'
+import { fetchPost, fetchDeletePost, fetchComments, fetchPosts } from '../actions'
 import PostItem from '../components/PostItem'
 import CommentItem from '../components/CommentItem'
 
@@ -11,14 +11,13 @@ class Post extends Component {
     readyToDelete: false
   }
   componentDidMount(){
-    const {requestPost, requestComments, posts} = this.props
+    const {requestPost, requestComments, posts, requestPosts} = this.props
     const {id} = this.props.match.params
-    //if this is the first page to load fetch posts for state
-    if(posts === {}){
-      requestPosts()
-    }
     requestPost(id)
     requestComments(id)
+
+    //force update posts state
+    requestPosts()
   }
 
   deletePost = id => {
