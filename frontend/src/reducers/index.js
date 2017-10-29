@@ -5,7 +5,8 @@ import {
   REQUEST_POSTS,
   RECEIVE_POSTS,
   REQUEST_POST,
-  RECEIVE_POST
+  RECEIVE_POST,
+  VOTED_POST
 } from '../actions'
 
 
@@ -49,6 +50,18 @@ function posts (state = {}, action) {
         ...state,
         selectedPost: post
       }
+    case VOTED_POST:
+      const updatedPosts = state.posts.map(item => {
+        if (item.id === post.id) {
+          item.voteScore = post.voteScore;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        posts: updatedPosts,
+        selectedPost: post
+      };
 
     default :
       return state

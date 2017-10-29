@@ -28,7 +28,6 @@ export function receivePosts(posts){
   }
 }
 
-
 export const REQUEST_POST = 'REQUEST_POST'
 export function requestPost(){
   return {
@@ -40,6 +39,14 @@ export const RECEIVE_POST = 'RECEIVE_POST'
 export function receivePost(post){
   return {
     type: RECEIVE_POST,
+    post
+  }
+}
+
+export const VOTED_POST = 'VOTED_POST'
+export function votedPost(post){
+  return {
+    type: VOTED_POST,
     post
   }
 }
