@@ -9,7 +9,9 @@ import {
   ADD_POST,
   DELETE_POST,
   EDIT_POST,
-  VOTED_POST
+  VOTED_POST,
+  REQUEST_COMMENTS,
+  GET_COMMENTS,
 } from '../actions'
 
 
@@ -54,7 +56,7 @@ function posts (state = {}, action) {
       return {
         ...state,
         posts: updatedPosts
-      };
+      }
     case ADD_POST:
       return {
         ...state,
@@ -101,8 +103,26 @@ function selectedPost(state = {}, action) {
   }
 }
 
+function comments(state = {}, action) {
+  switch (action.type) {
+    case REQUEST_COMMENTS:
+      return {
+        ...state,
+        comments: false
+      }
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.comments
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   categories,
   posts,
-  selectedPost
+  selectedPost,
+  comments
 })

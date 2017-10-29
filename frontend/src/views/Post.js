@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchPost, fetchDeletePost } from '../actions'
+import { fetchPost, fetchDeletePost, fetchComments } from '../actions'
 import PostItem from '../components/PostItem'
 
 class Post extends Component {
-  componentDidMount(){
-    const {requestPost} = this.props
-    const {id} = this.props.match.params
-    requestPost(id)
-  }
+
   state={
     readyToDelete: false
+  }
+  componentDidMount(){
+    const {requestPost, requestComments} = this.props
+    const {id} = this.props.match.params
+    requestPost(id)
+    requestComments(id)
   }
 
   deletePost = id => {
@@ -29,6 +31,7 @@ class Post extends Component {
 
   render(){
     const {selectedPost} =  this.props.selectedPost
+    const {comments} = this.props.comments
     if(selectedPost){
       return(
         <div>
@@ -41,9 +44,8 @@ class Post extends Component {
               className="btn btn-outline-danger"
               onClick={() => this.deletePost(selectedPost.id)}>{this.state.readyToDelete ? 'Are you sure?' : 'Delete'}</button>
           </div>
-
+          {comments && comments.map(c => <p>{c.body}</p> )}
         </div>
-
       )
     }else{
       return(
@@ -55,9 +57,10 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({ selectedPost }) {
+function mapStateToProps ({ selectedPost, comments }) {
   return {
     selectedPost,
+    comments,
   }
 }
 
@@ -65,6 +68,7 @@ function mapDispatchToProps (dispatch) {
   return {
     requestPost: id => dispatch(fetchPost(id)),
     deletePost: id => dispatch(fetchDeletePost(id)),
+    requestComments: id => dispatch(fetchComments(id)),
   }
 }
 

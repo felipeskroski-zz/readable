@@ -18,7 +18,9 @@ export const receiveCategories = (categories) =>({
   categories
 })
 
-
+//---------------------------
+//POSTS
+//---------------------------
 // get all posts
 export const fetchPosts = () => dispatch => {
   dispatch(requestPosts())
@@ -89,7 +91,7 @@ export const DELETE_POST = 'DELETE_POST'
 export const deletePost = id => ({
   type: DELETE_POST,
   id
-});
+})
 
 
 // edit post
@@ -100,4 +102,24 @@ export const EDIT_POST = 'EDIT_POST'
 export const editPost = post => ({
   type: EDIT_POST,
   post
+})
+
+
+//---------------------------
+//COMMENTS
+//---------------------------
+
+//Get comments by post
+export const fetchComments = postId => dispatch =>
+  api.getComments(postId).then(comments => dispatch(getComments(comments)))
+
+export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
+export const requestComments = comments => ({
+  type: REQUEST_COMMENTS,
+})
+
+export const GET_COMMENTS = 'GET_COMMENTS'
+export const getComments = comments => ({
+  type: GET_COMMENTS,
+  comments
 })
