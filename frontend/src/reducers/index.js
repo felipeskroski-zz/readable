@@ -7,6 +7,7 @@ import {
   REQUEST_POST,
   RECEIVE_POST,
   ADD_POST,
+  DELETE_POST,
   VOTED_POST
 } from '../actions'
 
@@ -30,7 +31,7 @@ function categories (state = {}, action) {
 
 
 function posts (state = {}, action) {
-  const { posts, post } = action
+  const { posts, post, id } = action
   switch (action.type) {
     case REQUEST_POSTS:
       return {
@@ -57,6 +58,14 @@ function posts (state = {}, action) {
       return {
         ...state,
         ...action.post
+      }
+    case DELETE_POST:
+      const remainingPosts = state.posts.filter(p => (p.id != id))
+      console.log('DELETE_POST')
+      console.log(remainingPosts)
+      return {
+        ...state,
+        posts: remainingPosts
       }
     default :
       return state

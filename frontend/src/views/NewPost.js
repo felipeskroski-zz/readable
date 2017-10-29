@@ -18,7 +18,7 @@ class NewPost extends Component {
     title: "",
     author: "",
     body: ""
-  };
+  }
 
   //Handles input fields
   handleChange = e => {

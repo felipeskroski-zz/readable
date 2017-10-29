@@ -42,21 +42,21 @@ export const addPost = post =>{
 }
 
 
-export const editPost = (post, postId) =>
-  fetch(`${endpoint}/posts/${postId}`, {
+export const editPost = (post, id) =>
+  fetch(`${endpoint}/posts/${id}`, {
     method: "PUT",
     headers,
     body: JSON.stringify(post)
   }).then(data => data.json())
 
-export const deletePost = postId =>
-  fetch(`${endpoint}/posts/${postId}`, {
+export const deletePost = id =>
+  fetch(`${endpoint}/posts/${id}`, {
     method: "DELETE",
     headers
   }).then(res => res)
 
-export const votePost = (postId, option) =>
-  fetch(`${endpoint}/posts/${postId}`, {
+export const votePost = (id, option) =>
+  fetch(`${endpoint}/posts/${id}`, {
     method: `POST`,
     headers,
     body: JSON.stringify({ option })

@@ -1,5 +1,6 @@
 import * as api from "../utils/api"
 
+//get all categories
 export const fetchCategories = () => dispatch => {
   dispatch(requestCategories())
   api.getCategories()
@@ -18,7 +19,7 @@ export const receiveCategories = (categories) =>({
 })
 
 
-
+// get all posts
 export const fetchPosts = () => dispatch => {
   dispatch(requestPosts())
   api.getPosts()
@@ -36,7 +37,7 @@ export const receivePosts = posts => ({
   posts
 })
 
-
+// get post
 export const fetchPost = id => dispatch => {
   dispatch(requestPost())
   api.getPost(id)
@@ -54,7 +55,7 @@ export const receivePost = post => ({
   post
 })
 
-
+//vote post
 export const fetchVotePost = (id, option) => dispatch =>
   api.votePost(id, option)
   .then(post => {
@@ -68,15 +69,24 @@ export const votedPost = (post) => ({
   post
 })
 
-
-export const fetchNewPost = post => dispatch => {
+//add post
+export const fetchNewPost = post => dispatch =>
   api.addPost(post)
   .then(post => dispatch(addPost(post)))
-}
-
-
 export const ADD_POST = 'ADD_POST'
 export const addPost = (post) => ({
   type: ADD_POST,
   post
 })
+
+
+//delete post
+export const fetchDeletePost = id => dispatch =>
+  api.deletePost(id)
+  .then(post => dispatch(deletePost(id)))
+
+export const DELETE_POST = 'DELETE_POST'
+export const deletePost = id => ({
+  type: DELETE_POST,
+  id
+});
