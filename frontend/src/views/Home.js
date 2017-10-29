@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import { fetchCategories, fetchPosts } from '../utils/api'
+import { fetchCategories, fetchPosts } from '../actions'
 import { connect } from 'react-redux'
 import PostItem from '../components/PostItem'
 

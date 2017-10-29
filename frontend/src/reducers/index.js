@@ -40,6 +40,26 @@ function posts (state = {}, action) {
         ...state,
         posts
       }
+    case VOTED_POST:
+      const updatedPosts = state.posts.map(p => {
+        if(p.id == post.id){
+          p.voteScore = post.voteScore
+        }
+        return p
+      })
+      return {
+        ...state,
+        posts: updatedPosts
+      };
+
+    default :
+      return state
+  }
+}
+
+function selectedPost(state = {}, action) {
+  const { post } = action
+  switch (action.type) {
     case REQUEST_POST:
       return {
         ...state,
@@ -51,18 +71,10 @@ function posts (state = {}, action) {
         selectedPost: post
       }
     case VOTED_POST:
-      const updatedPosts = state.posts.map(item => {
-        if (item.id === post.id) {
-          item.voteScore = post.voteScore;
-        }
-        return item;
-      });
       return {
         ...state,
-        posts: updatedPosts,
         selectedPost: post
-      };
-
+      }
     default :
       return state
   }
@@ -71,4 +83,5 @@ function posts (state = {}, action) {
 export default combineReducers({
   categories,
   posts,
+  selectedPost
 })

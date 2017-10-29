@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { votePost } from '../utils/api'
+import { fetchVotePost } from '../actions'
 
 const PostItem = ({ post, posts, vote }) => (
   <div>
@@ -24,7 +24,7 @@ function mapStateToProps ({ posts }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    vote: (id, option) => dispatch(votePost(id, option)),
+    vote: (id, option) => dispatch(fetchVotePost(id, option)),
   }
 }
 

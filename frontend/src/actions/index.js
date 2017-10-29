@@ -1,52 +1,68 @@
-export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
-export function requestCategories(){
-  return {
-    type: REQUEST_CATEGORIES,
-  }
+import * as api from "../utils/api"
+
+export const fetchCategories = () => dispatch => {
+  dispatch(requestCategories())
+  api.getCategories()
+    .then(categories => dispatch(receiveCategories(categories)))
 }
 
+export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
+export const requestCategories = () => ({
+  type: REQUEST_CATEGORIES,
+})
+
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
-export function receiveCategories({categories}){
-  return {
-    type: RECEIVE_CATEGORIES,
-    categories
-  }
+export const receiveCategories = (categories) =>({
+  type: RECEIVE_CATEGORIES,
+  categories
+})
+
+
+
+export const fetchPosts = () => dispatch => {
+  dispatch(requestPosts())
+  api.getPosts()
+    .then(posts => dispatch(receivePosts(posts)))
 }
 
 export const REQUEST_POSTS = 'REQUEST_POSTS'
-export function requestPosts(){
-  return {
-    type: REQUEST_POSTS
-  }
-}
+export const requestPosts = () => ({
+  type: REQUEST_POSTS
+})
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export function receivePosts(posts){
-  return {
-    type: RECEIVE_POSTS,
-    posts
-  }
+export const receivePosts = (posts) => ({
+  type: RECEIVE_POSTS,
+  posts
+})
+
+
+export const fetchPost = (id) => dispatch => {
+  dispatch(requestPost())
+  api.getPost(id)
+    .then(post => dispatch(receivePost(post)))
 }
 
 export const REQUEST_POST = 'REQUEST_POST'
-export function requestPost(){
-  return {
-    type: REQUEST_POST
-  }
-}
+export const requestPost = () => ({
+  type: REQUEST_POST
+})
 
 export const RECEIVE_POST = 'RECEIVE_POST'
-export function receivePost(post){
-  return {
-    type: RECEIVE_POST,
-    post
-  }
-}
+export const receivePost = (post) => ({
+  type: RECEIVE_POST,
+  post
+})
+
+export const fetchVotePost = (id, option) => dispatch =>
+  api.votePost(id, option)
+  .then(post => {
+    console.log(post)
+    dispatch(votedPost(post))
+  })
 
 export const VOTED_POST = 'VOTED_POST'
-export function votedPost(post){
-  return {
-    type: VOTED_POST,
-    post
-  }
-}
+export const votedPost = (post) => ({
+  type: VOTED_POST,
+  post
+})

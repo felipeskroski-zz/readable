@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchPost } from '../utils/api'
+import { fetchPost } from '../actions'
 import PostItem from '../components/PostItem'
 
 class Post extends Component {
@@ -11,7 +11,7 @@ class Post extends Component {
     requestPost(id)
   }
   render(){
-    const {selectedPost} =  this.props.posts
+    const {selectedPost} =  this.props.selectedPost
     if(selectedPost){
       return(
         <div>
@@ -30,9 +30,9 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ selectedPost }) {
   return {
-    posts,
+    selectedPost,
   }
 }
 
