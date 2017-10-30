@@ -5,3 +5,9 @@ body {
 .container{
   max-width: 860px;
 }
+.post-item{
+  padding:20px 0;
+}
+.post-item + .post-item{
+  border-top: 1px solid #eee;
+}

@@ -22,7 +22,6 @@ class Post extends Component {
 
   deletePost = id => {
     const {history, deletePost} = this.props
-
     if(this.state.readyToDelete){
       deletePost(id)
       //Redirects to Home after deleting post.
@@ -30,7 +29,6 @@ class Post extends Component {
     }else{
       this.setState({readyToDelete: true})
     }
-
   }
 
   render(){
@@ -39,8 +37,8 @@ class Post extends Component {
     console.log('post view')
     if(selectedPost){
       return(
-        <div>
-          <Link to='/'>Back</Link>
+        <div >
+          <Link to='/' > ← Back</Link>
           <PostItem post={selectedPost} />
           <div className="btn-group">
             <Link to={`/post/edit/${selectedPost.id}`} className="btn btn-primary">Edit</Link>

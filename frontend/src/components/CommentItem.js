@@ -2,17 +2,16 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchVoteComment } from '../actions'
+import moment from 'moment'
 
 const CommentItem = ({comment, comments, vote}) => (
   <div>
     <hr/>
     <h3>{comment.title}</h3>
+    <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("MM-DD-YYYY")}</p>
     <p>{comment.body}</p>
-    <p>author: {comment.author}</p>
     <p>votes: {comment.voteScore} | <a href='#!' onClick={() => vote(comment.id, 'upVote')}>upVote</a> | <a href='#!' onClick={() => vote(comment.id, 'downVote')}>downVote</a>
     </p>
-    <p>timestamp: {comment.timestamp}</p>
-
   </div>
 )
 //to force refresh when data changes elsewhere

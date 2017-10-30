@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
 import { connect } from 'react-redux'
 import PostItem from '../components/PostItem'
+import Nav from '../components/Nav'
 
 
 class Home extends Component {
@@ -21,11 +22,15 @@ class Home extends Component {
 
   renderPosts(){
     const {posts} = this.props.posts
+    const {category} = this.props.match.params
     console.log('props')
     console.log(this.props)
 
     if(posts){
-      const ordered = this.sortPosts(posts, this.state.orderBy)
+      let ordered = this.sortPosts(posts, this.state.orderBy)
+      if(category){
+        ordered = ordered.filter(p => p.category == category)
+      }
       return(
           ordered.map((p, index) => (
             <PostItem key={index} post={p} />
@@ -49,9 +54,10 @@ class Home extends Component {
     console.log(this.props)
     if(categories){
       return(
-        <ul>
+        <ul className="list-group">
+          <li className="list-group-item"><strong>Categories</strong></li>
           {categories.map((c, index) => (
-            <li key={index}>{c.name}</li>
+            <li className="list-group-item" key={index}><Link to={`/${c.path}`}>{c.name}</Link></li>
           ))}
         </ul>
       )
@@ -59,32 +65,35 @@ class Home extends Component {
   }
 
   render() {
+    const {category} = this.props.match.params
     return (
-      <div>
-        <div className='d-flex flex-row justify-content-between'>
-          <div>
-            <h1>Categories</h1>
-            {this.renderCategories()}
-          </div>
-          <div>
-            <Link to='/newpost' className="btn btn-primary" >New Post</Link>
-          </div>
-        </div>
 
-        <div className='form-inline'>
-          <div className="form-group">
-            <label htmlFor="orderBy">Order by</label>
-            <select className="form-control" name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
-              <option value="voteScore">Votes</option>
-              <option value="timestamp">Date</option>
-            </select>
+
+
+
+          <div className='d-flex flex-row justify-content-between'>
+            <div className='w-75' style={{paddingRight: 30}}>
+              <div className='form-inline'>
+                <div className="form-group">
+                  <label htmlFor="orderBy">Order by</label>
+                  <select className="form-control" name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
+                    <option value="voteScore">Votes</option>
+                    <option value="timestamp">Date</option>
+                  </select>
+                </div>
+              </div>
+              <hr/>
+              {this.renderPosts()}
+            </div>
+            <div className='w-25'>
+              {this.renderCategories()}
+            </div>
           </div>
-        </div>
 
-        {this.renderPosts()}
 
-      </div>
-    );
+
+
+    )
   }
 }
 
