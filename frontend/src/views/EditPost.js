@@ -57,7 +57,7 @@ class EditPost extends Component {
 
     //Redirects to Home after adding post.
     history.push("/")
-  };
+  }
 
   render(){
     const {selectedPost} =  this.props.selectedPost

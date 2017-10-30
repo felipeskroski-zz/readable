@@ -134,3 +134,14 @@ export const voteComment = (comment) => ({
   type: VOTE_COMMENT,
   comment
 })
+
+//add commment
+export const fetchNewComment = comment => dispatch =>
+  api.addComment(comment)
+  .then(comment => dispatch(newComment(comment)))
+
+export const NEW_COMMENT = 'NEW_COMMENT'
+export const newComment = comment => ({
+  type: NEW_COMMENT,
+  comment
+})

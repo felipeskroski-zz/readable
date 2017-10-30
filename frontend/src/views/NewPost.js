@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchNewPost } from "../actions";
-import uuidv1 from "uuid/v1";
+import { fetchNewPost } from "../actions"
+import uuidv1 from "uuid/v1"
 
 const categories = [
   { key: 1, text: "React", value: "react" },
@@ -32,14 +32,14 @@ class NewPost extends Component {
 
   //Handles category change
   handleCategoryChange = (e) => {
-    this.setState({ category: e.target.value });
+    this.setState({ category: e.target.value })
   }
 
   //Submits post
   handleSubmit = e => {
     const {createPost, history} = this.props
     const {title, body, author, category} = this.state
-    e.preventDefault();
+    e.preventDefault()
     const data = {
       id: uuidv1(),
       timestamp: Date.now(),
@@ -47,15 +47,13 @@ class NewPost extends Component {
       body,
       author,
       category,
-      deleted: false,
-      voteScore: 1
-    };
+    }
     //Dispatches action with post
     createPost(data)
 
     //Redirects to Home after adding post.
     history.push("/")
-  };
+  }
 
   render(){
     return(

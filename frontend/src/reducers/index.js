@@ -13,6 +13,7 @@ import {
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
   VOTE_COMMENT,
+  NEW_COMMENT,
 } from '../actions'
 
 
@@ -105,7 +106,7 @@ function selectedPost(state = {}, action) {
 }
 
 function comments(state = {}, action) {
-  const { post, comment } = action
+  const { comments, comment } = action
   switch (action.type) {
     case REQUEST_COMMENTS:
       return {
@@ -115,8 +116,9 @@ function comments(state = {}, action) {
     case RECEIVE_COMMENTS:
       return {
         ...state,
-        comments: action.comments
+        comments
       }
+
     case VOTE_COMMENT:
       const updatedComments = state.comments.map(item => {
         if (item.id === comment.id) {
@@ -129,6 +131,11 @@ function comments(state = {}, action) {
       return {
         ...state,
         comments: updatedComments
+      }
+    case NEW_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.concat(comment)
       }
     default:
       return state
