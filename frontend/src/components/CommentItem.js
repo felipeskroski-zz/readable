@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchVoteComment } from '../actions'
+import { fetchVoteComment, deleteComment } from '../actions'
 import moment from 'moment'
 
 class CommentItem extends Component {
@@ -9,9 +9,9 @@ class CommentItem extends Component {
     readyToDelete: false
   }
   onDeleteComment = id => {
-    const {history, deletePost} = this.props
+    const {removeComment} = this.props
     if(this.state.readyToDelete){
-      deletePost(id)
+      removeComment(id)
     }else{
       this.setState({readyToDelete: true})
     }
@@ -64,6 +64,7 @@ function mapStateToProps ({ comments }) {
 function mapDispatchToProps (dispatch) {
   return {
     vote: (id, option) => dispatch(fetchVoteComment(id, option)),
+    removeComment: id => dispatch(deleteComment(id))
   }
 }
 

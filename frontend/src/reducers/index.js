@@ -14,6 +14,7 @@ import {
   RECEIVE_COMMENTS,
   VOTE_COMMENT,
   NEW_COMMENT,
+  DELETE_COMMENT,
 } from '../actions'
 
 
@@ -106,7 +107,7 @@ function selectedPost(state = {}, action) {
 }
 
 function comments(state = {}, action) {
-  const { comments, comment } = action
+  const { comments, comment, id } = action
   switch (action.type) {
     case REQUEST_COMMENTS:
       return {
@@ -136,6 +137,14 @@ function comments(state = {}, action) {
       return {
         ...state,
         comments: state.comments.concat(comment)
+      }
+    case DELETE_COMMENT:
+      const remainingComments = state.comments.filter(item =>
+        item.id !== id
+      )
+      return {
+        ...state,
+        comments: remainingComments
       }
     default:
       return state

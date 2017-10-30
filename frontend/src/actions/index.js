@@ -145,3 +145,15 @@ export const newComment = comment => ({
   type: NEW_COMMENT,
   comment
 })
+
+
+// delete comment
+export const fetchDeleteComment = id => dispatch =>
+  api.deleteComment(id)
+    .then(id => dispatch(deleteComment(id)))
+
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const deleteComment = id => ({
+  type: DELETE_COMMENT,
+  id
+});

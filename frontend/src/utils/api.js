@@ -67,8 +67,8 @@ export const votePost = (id, option) =>
 //
 //COMMENTS
 //
-export const getComment = commentId =>
-  fetch(`${endpoint}/comments/${commentId}`, { headers })
+export const getComment = id =>
+  fetch(`${endpoint}/comments/${id}`, { headers })
     .then(res => res.json().then(data => data))
 
 export const getComments = postId =>
@@ -82,23 +82,23 @@ export const addComment = comment =>
     body: JSON.stringify(comment)
   }).then(response => response.json())
 
-export const editComment = (comment, commentId) => {
-  return fetch(`${endpoint}/comments/${commentId}`, {
+export const editComment = (comment, id) => {
+  return fetch(`${endpoint}/comments/${id}`, {
     method: "PUT",
     headers,
     body: JSON.stringify(comment)
   }).then(data => data.json())
 }
 
-export const deleteComment = commentId => {
-  return fetch(`${endpoint}/comments/${commentId}`, {
+export const deleteComment = id => {
+  return fetch(`${endpoint}/comments/${id}`, {
     method: "DELETE",
     headers
   }).then(response => response.json())
 }
 
-export const voteComment = (commentId, option) =>
-  fetch(`${endpoint}/comments/${commentId}`, {
+export const voteComment = (id, option) =>
+  fetch(`${endpoint}/comments/${id}`, {
     method: "POST",
     headers,
     body: JSON.stringify({
