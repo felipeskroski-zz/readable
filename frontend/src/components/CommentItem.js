@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchVoteComment, deleteComment, fetchUpdateComment } from '../actions'
 import moment from 'moment'
@@ -97,23 +96,22 @@ class CommentItem extends Component {
     }
   }
   render(){
-    const {comment, comments, vote} = this.props
+    const {comment, vote} = this.props
     return(
       <div>
         <hr/>
 
         <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("DD MMM YYYY")}</p>
         {this.renderBody()}
-        <div class="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>
-          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'upVote')}>↑</a>
+        <div className="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>
+          <a href='upvote' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'upVote')}>↑</a>
           <button type="button" className="btn btn-sm btn-light">
              {comment.voteScore} votes
           </button>
-
-          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'downVote')}>↓</a>
+          <a href='downvote' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'downVote')}>↓</a>
         </div>
         <div className="btn-group">
-          <a href='#' onClick={(e) => this.onEditComment(e)} className="btn btn-light btn-sm">Edit</a>
+          <a href='edit' onClick={(e) => this.onEditComment(e)} className="btn btn-light btn-sm">Edit</a>
           {this.renderDeleteBtn()}
         </div>
       </div>

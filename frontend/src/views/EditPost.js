@@ -3,14 +3,6 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchPost, fetchUpdatePost } from "../actions";
 
-
-const categories = [
-  { key: 1, text: "React", value: "react" },
-  { key: 2, text: "Redux", value: "redux" },
-  { key: 3, text: "Udacity", value: "udacity" }
-];
-
-
 class EditPost extends Component {
   state = {
     title: "",
@@ -64,7 +56,7 @@ class EditPost extends Component {
     if(selectedPost){
       return(
         <div>
-          <Link to='/'>Back</Link>
+          <Link to='/'>← Back</Link>
           <form onSubmit={this.handleSubmit}>
 
             <div className="form-group">

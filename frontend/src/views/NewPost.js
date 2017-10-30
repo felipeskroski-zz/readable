@@ -58,7 +58,7 @@ class NewPost extends Component {
   render(){
     return(
       <div>
-        <Link to='/'>Close</Link>
+        <Link to='/'>← Back</Link>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Category</label>

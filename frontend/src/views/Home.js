@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import { fetchCategories, fetchPosts } from '../actions'
 import { connect } from 'react-redux'
 import PostItem from '../components/PostItem'
-import Nav from '../components/Nav'
 
 
 class Home extends Component {
@@ -29,7 +28,7 @@ class Home extends Component {
     if(posts){
       let ordered = this.sortPosts(posts, this.state.orderBy)
       if(category){
-        ordered = ordered.filter(p => p.category == category)
+        ordered = ordered.filter(p => p.category === category)
       }
       return(
           ordered.map((p, index) => (
@@ -43,9 +42,7 @@ class Home extends Component {
   }
 
   sortPosts(posts, orderBy){
-    return posts.sort(function (a, b) {
-      return a[orderBy] - b[orderBy];
-    });
+    return posts.sort((a, b) => a[orderBy] - b[orderBy]).reverse()
   }
 
   renderCategories(){
@@ -65,34 +62,25 @@ class Home extends Component {
   }
 
   render() {
-    const {category} = this.props.match.params
     return (
-
-
-
-
-          <div className='d-flex flex-row justify-content-between'>
-            <div className='w-75' style={{paddingRight: 30}}>
-              <div className='form-inline'>
-                <div className="form-group">
-                  <label htmlFor="orderBy">Order by</label>
-                  <select className="form-control" name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
-                    <option value="voteScore">Votes</option>
-                    <option value="timestamp">Date</option>
-                  </select>
-                </div>
-              </div>
-              <hr/>
-              {this.renderPosts()}
-            </div>
-            <div className='w-25'>
-              {this.renderCategories()}
+      <div className='d-flex flex-row justify-content-between'>
+        <div className='w-75' style={{paddingRight: 30}}>
+          <div className='form-inline'>
+            <div className="form-group">
+              <label htmlFor="orderBy">Order by</label>
+              <select className="form-control" name="orderBy" id="" value={this.state.orderBy} onChange={this.handleChange}>
+                <option value="voteScore">Votes</option>
+                <option value="timestamp">Date</option>
+              </select>
             </div>
           </div>
-
-
-
-
+          <hr/>
+          {this.renderPosts()}
+        </div>
+        <div className='w-25'>
+          {this.renderCategories()}
+        </div>
+      </div>
     )
   }
 }

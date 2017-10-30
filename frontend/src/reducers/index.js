@@ -64,12 +64,12 @@ function posts (state = {}, action) {
     case NEW_POST:
       return {
         ...state,
-        ...action.post
+        ...post
       }
     case EDIT_POST:
       return {
         ...state,
-        ...action.post
+        ...post
       }
     case DELETE_POST:
       const remainingPosts = state.posts.filter(p => (p.id !== id))
