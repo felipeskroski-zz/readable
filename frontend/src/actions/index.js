@@ -96,10 +96,10 @@ export const deletePost = id => ({
 
 // edit post
 export const fetchUpdatePost = (id, post) => dispatch =>
-  api.editPost(id, post).then(post => dispatch(editPost(post)))
+  api.updatePost(id, post).then(post => dispatch(updatePost(post)))
 
 export const EDIT_POST = 'EDIT_POST'
-export const editPost = post => ({
+export const updatePost = post => ({
   type: EDIT_POST,
   post
 })
@@ -160,7 +160,7 @@ export const deleteComment = id => ({
 
 // update comment
 export const fetchUpdateComment = (id, comment) => dispatch =>
-  api.editComment(id, comment)
+  api.updateComment(id, comment)
     .then(comment => dispatch(updateComment(comment)))
 
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'

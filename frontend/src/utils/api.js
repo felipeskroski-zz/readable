@@ -42,7 +42,7 @@ export const addPost = post =>{
 }
 
 
-export const editPost = (id, post) =>
+export const updatePost = (id, post) =>
   fetch(`${endpoint}/posts/${id}`, {
     method: "PUT",
     headers,
@@ -82,7 +82,7 @@ export const addComment = comment =>
     body: JSON.stringify(comment)
   }).then(response => response.json())
 
-export const editComment = (id, comment) => {
+export const updateComment = (id, comment) => {
   return fetch(`${endpoint}/comments/${id}`, {
     method: "PUT",
     headers,
