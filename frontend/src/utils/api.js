@@ -82,7 +82,7 @@ export const addComment = comment =>
     body: JSON.stringify(comment)
   }).then(response => response.json())
 
-export const editComment = (comment, id) => {
+export const editComment = (id, comment) => {
   return fetch(`${endpoint}/comments/${id}`, {
     method: "PUT",
     headers,

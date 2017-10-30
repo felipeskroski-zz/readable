@@ -74,10 +74,10 @@ export const votedPost = (post) => ({
 //add post
 export const fetchNewPost = post => dispatch =>
   api.addPost(post)
-  .then(post => dispatch(addPost(post)))
-export const ADD_POST = 'ADD_POST'
-export const addPost = (post) => ({
-  type: ADD_POST,
+  .then(post => dispatch(newPost(post)))
+export const NEW_POST = 'NEW_POST'
+export const newPost = (post) => ({
+  type: NEW_POST,
   post
 })
 
@@ -156,4 +156,15 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const deleteComment = id => ({
   type: DELETE_COMMENT,
   id
+});
+
+// update comment
+export const fetchUpdateComment = (id, comment) => dispatch =>
+  api.editComment(id, comment)
+    .then(comment => dispatch(updateComment(comment)))
+
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const updateComment = (comment) => ({
+  type: UPDATE_COMMENT,
+  comment
 });

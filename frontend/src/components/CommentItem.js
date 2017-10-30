@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchVoteComment, deleteComment } from '../actions'
+import { fetchVoteComment, deleteComment, fetchUpdateComment } from '../actions'
 import moment from 'moment'
 
 class CommentItem extends Component {
@@ -12,15 +12,17 @@ class CommentItem extends Component {
   }
   //Submits post
   handleSubmit = e => {
-    const {updatePost} = this.props
+    const {updateComment} = this.props
     const {comment} = this.props
     const { body } = this.state
     e.preventDefault()
     const data = {
       body,
     };
-    //Dispatches action with post
-    //updatePost(selectedPost.id, data)
+    //Dispatches action with data to update comment
+    updateComment(comment.id, data)
+
+    this.setState({editMode: false})
   }
   onDeleteComment = id => {
     const {removeComment} = this.props
@@ -99,13 +101,19 @@ class CommentItem extends Component {
     return(
       <div>
         <hr/>
-        <h3>{comment.title}</h3>
-        <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("MM-DD-YYYY")}</p>
+
+        <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("DD MMM YYYY")}</p>
         {this.renderBody()}
-        <p>votes: {comment.voteScore} | <a href='#!' onClick={() => vote(comment.id, 'upVote')}>upVote</a> | <a href='#!' onClick={() => vote(comment.id, 'downVote')}>downVote</a>
-        </p>
+        <div class="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>
+          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'upVote')}>↑</a>
+          <button type="button" className="btn btn-sm btn-light">
+             {comment.voteScore} votes
+          </button>
+
+          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'downVote')}>↓</a>
+        </div>
         <div className="btn-group">
-          <a href='#' onClick={(e) => this.onEditComment(e)} className="btn btn-primary btn-sm">Edit</a>
+          <a href='#' onClick={(e) => this.onEditComment(e)} className="btn btn-light btn-sm">Edit</a>
           {this.renderDeleteBtn()}
         </div>
       </div>
@@ -122,7 +130,8 @@ function mapStateToProps ({ comments }) {
 function mapDispatchToProps (dispatch) {
   return {
     vote: (id, option) => dispatch(fetchVoteComment(id, option)),
-    removeComment: id => dispatch(deleteComment(id))
+    removeComment: id => dispatch(deleteComment(id)),
+    updateComment: (id, data) => dispatch(fetchUpdateComment(id, data))
   }
 }
 

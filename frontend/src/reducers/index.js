@@ -6,7 +6,7 @@ import {
   RECEIVE_POSTS,
   REQUEST_POST,
   RECEIVE_POST,
-  ADD_POST,
+  NEW_POST,
   DELETE_POST,
   EDIT_POST,
   VOTED_POST,
@@ -15,6 +15,7 @@ import {
   VOTE_COMMENT,
   NEW_COMMENT,
   DELETE_COMMENT,
+  UPDATE_COMMENT,
 } from '../actions'
 
 
@@ -60,7 +61,7 @@ function posts (state = {}, action) {
         ...state,
         posts: updatedPosts
       }
-    case ADD_POST:
+    case NEW_POST:
       return {
         ...state,
         ...action.post
@@ -145,6 +146,18 @@ function comments(state = {}, action) {
       return {
         ...state,
         comments: remainingComments
+      }
+    case UPDATE_COMMENT:
+      const updated = state.comments.map(c => {
+        if (c.id === comment.id) {
+          c.body = comment.body
+        }
+        return c
+      })
+
+      return {
+        ...state,
+        comments: updated
       }
     default:
       return state

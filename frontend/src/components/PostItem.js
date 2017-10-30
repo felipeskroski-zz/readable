@@ -7,7 +7,7 @@ import moment from 'moment'
 const PostItem = ({ post, posts, vote }) => (
   <div className='post-item'>
     <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
-    <p className='text-secondary'>Author: <strong>{post.author}</strong> | {post.commentCount} comments | {moment(post.timestamp).format("MM-DD-YYYY")}</p>
+    <p className='text-secondary'>Author: <strong>{post.author}</strong> | {post.commentCount} comments | {moment(post.timestamp).format("DD MMM YYYY")}</p>
     <p>{post.body}</p>
 
     <p>votes: {post.voteScore} | <a href='#!' onClick={() => vote(post.id, 'upVote')}>upVote</a> | <a href='#!' onClick={() => vote(post.id, 'downVote')}>downVote</a>
