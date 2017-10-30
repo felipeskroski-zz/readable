@@ -44,7 +44,7 @@ class PostItem extends Component {
     const { post, vote } = this.props
     return(
       <div className='post-item'>
-        <Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link>
+        <Link to={`/${post.category}/${post.id}`}><h3>{post.title}</h3></Link>
         <p className='text-secondary'>Author: <strong>{post.author}</strong> | {post.commentCount} comments | {moment(post.timestamp).format("DD MMM YYYY")}</p>
         <p>{post.body}</p>
         <div className="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>

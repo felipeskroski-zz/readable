@@ -15,9 +15,9 @@ class Post extends Component {
   }
   componentDidMount(){
     const {requestPost, requestComments, requestPosts} = this.props
-    const {id} = this.props.match.params
-    requestPost(id)
-    requestComments(id)
+    const {post_id} = this.props.match.params
+    requestPost(post_id)
+    requestComments(post_id)
 
     //force update posts state
     requestPosts()
@@ -68,7 +68,7 @@ class Post extends Component {
 
           {comments &&
             <div style={{marginTop: 30}}>
-              <h3>Comments</h3>
+              {comments.length > 0 && <h3>Comments</h3>}
               {comments.map(c => <CommentItem comment={c} key={c.id} /> )}
             </div>
           }
