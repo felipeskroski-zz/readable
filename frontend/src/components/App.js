@@ -10,24 +10,20 @@ import Nav from '../components/Nav'
 //const HomeView = () =>(<Home/>)
 
 class App extends Component {
-
   render() {
     return (
-
-
-        <Router>
-          <div>
-            <Nav/>
-            <div className='container' style={{marginTop: 30}}>
-              <Route exact path="/" component={Home}/>
-              <Route exact path="/:category" component={Home}/>
-              <Route path="/newpost" component={NewPost}/>
-              <Route exact path="/post/:id" component={Post}/>
-              <Route path="/post/edit/:id" component={EditPost}/>
-            </div>
+      <Router>
+        <div>
+          <Nav/>
+          <div className='container' style={{marginTop: 30}}>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/:category" component={Home}/>
+            <Route path="/newpost" component={NewPost}/>
+            <Route exact path="/post/:id" component={Post}/>
+            <Route path="/post/edit/:id" component={EditPost}/>
           </div>
-        </Router>
-
+        </div>
+      </Router>
     )
   }
 }
