@@ -8,7 +8,7 @@ import {
   RECEIVE_POST,
   NEW_POST,
   DELETE_POST,
-  EDIT_POST,
+  UPDATE_POST,
   VOTED_POST,
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
@@ -66,10 +66,17 @@ function posts (state = {}, action) {
         ...state,
         ...post
       }
-    case EDIT_POST:
+    case UPDATE_POST:
+      const updatedP = state.posts.map(p => {
+        if (p.id === post.id) {
+          p.body = post.body
+          p.title = post.title
+        }
+        return p
+      })
       return {
         ...state,
-        ...post
+        posts: updatedP
       }
     case DELETE_POST:
       const remainingPosts = state.posts.filter(p => (p.id !== id))
@@ -148,7 +155,7 @@ function comments(state = {}, action) {
         comments: remainingComments
       }
     case UPDATE_COMMENT:
-      const updated = state.comments.map(c => {
+      const updatedC = state.comments.map(c => {
         if (c.id === comment.id) {
           c.body = comment.body
         }
@@ -157,7 +164,7 @@ function comments(state = {}, action) {
 
       return {
         ...state,
-        comments: updated
+        comments: updatedC
       }
     default:
       return state

@@ -98,9 +98,9 @@ export const deletePost = id => ({
 export const fetchUpdatePost = (id, post) => dispatch =>
   api.updatePost(id, post).then(post => dispatch(updatePost(post)))
 
-export const EDIT_POST = 'EDIT_POST'
+export const UPDATE_POST = 'UPDATE_POST'
 export const updatePost = post => ({
-  type: EDIT_POST,
+  type: UPDATE_POST,
   post
 })
 
