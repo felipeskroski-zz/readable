@@ -1,4 +1,22 @@
 import * as api from "../utils/api"
+import {
+  REQUEST_CATEGORIES,
+  RECEIVE_CATEGORIES,
+  REQUEST_POSTS,
+  RECEIVE_POSTS,
+  REQUEST_POST,
+  RECEIVE_POST,
+  NEW_POST,
+  DELETE_POST,
+  UPDATE_POST,
+  VOTED_POST,
+  REQUEST_COMMENTS,
+  RECEIVE_COMMENTS,
+  VOTE_COMMENT,
+  NEW_COMMENT,
+  DELETE_COMMENT,
+  UPDATE_COMMENT,
+} from './types'
 
 //get all categories
 export const fetchCategories = () => dispatch => {
@@ -7,12 +25,12 @@ export const fetchCategories = () => dispatch => {
     .then(categories => dispatch(receiveCategories(categories)))
 }
 
-export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
+
 export const requestCategories = () => ({
   type: REQUEST_CATEGORIES,
 })
 
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+
 export const receiveCategories = (categories) =>({
   type: RECEIVE_CATEGORIES,
   categories
@@ -28,12 +46,12 @@ export const fetchPosts = () => dispatch => {
     .then(posts => dispatch(receivePosts(posts)))
 }
 
-export const REQUEST_POSTS = 'REQUEST_POSTS'
+
 export const requestPosts = () => ({
   type: REQUEST_POSTS
 })
 
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
@@ -46,12 +64,12 @@ export const fetchPost = id => dispatch => {
     .then(post => dispatch(receivePost(post)))
 }
 
-export const REQUEST_POST = 'REQUEST_POST'
+
 export const requestPost = () => ({
   type: REQUEST_POST
 })
 
-export const RECEIVE_POST = 'RECEIVE_POST'
+
 export const receivePost = post => ({
   type: RECEIVE_POST,
   post
@@ -65,7 +83,7 @@ export const fetchVotePost = (id, option) => dispatch =>
     dispatch(votedPost(post))
   })
 
-export const VOTED_POST = 'VOTED_POST'
+
 export const votedPost = (post) => ({
   type: VOTED_POST,
   post
@@ -75,7 +93,7 @@ export const votedPost = (post) => ({
 export const fetchNewPost = post => dispatch =>
   api.addPost(post)
   .then(post => dispatch(newPost(post)))
-export const NEW_POST = 'NEW_POST'
+
 export const newPost = (post) => ({
   type: NEW_POST,
   post
@@ -87,7 +105,7 @@ export const fetchDeletePost = id => dispatch =>
   api.deletePost(id)
   .then(post => dispatch(deletePost(id)))
 
-export const DELETE_POST = 'DELETE_POST'
+
 export const deletePost = id => ({
   type: DELETE_POST,
   id
@@ -98,7 +116,7 @@ export const deletePost = id => ({
 export const fetchUpdatePost = (id, post) => dispatch =>
   api.updatePost(id, post).then(post => dispatch(updatePost(post)))
 
-export const UPDATE_POST = 'UPDATE_POST'
+
 export const updatePost = post => ({
   type: UPDATE_POST,
   post
@@ -113,12 +131,12 @@ export const updatePost = post => ({
 export const fetchComments = postId => dispatch =>
   api.getComments(postId).then(comments => dispatch(receiveComments(comments)))
 
-export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
+
 export const requestComments = comments => ({
   type: REQUEST_COMMENTS,
 })
 
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+
 export const receiveComments = comments => ({
   type: RECEIVE_COMMENTS,
   comments
@@ -129,7 +147,7 @@ export const fetchVoteComment = (id, option) => dispatch =>
   api.voteComment(id, option)
     .then(comment => dispatch(voteComment(comment)))
 
-export const VOTE_COMMENT = 'VOTE_COMMENT'
+
 export const voteComment = (comment) => ({
   type: VOTE_COMMENT,
   comment
@@ -140,7 +158,7 @@ export const fetchNewComment = comment => dispatch =>
   api.addComment(comment)
   .then(comment => dispatch(newComment(comment)))
 
-export const NEW_COMMENT = 'NEW_COMMENT'
+
 export const newComment = comment => ({
   type: NEW_COMMENT,
   comment
@@ -152,7 +170,7 @@ export const fetchDeleteComment = id => dispatch =>
   api.deleteComment(id)
     .then(id => dispatch(deleteComment(id)))
 
-export const DELETE_COMMENT = 'DELETE_COMMENT'
+
 export const deleteComment = id => ({
   type: DELETE_COMMENT,
   id
@@ -163,7 +181,7 @@ export const fetchUpdateComment = (id, comment) => dispatch =>
   api.updateComment(id, comment)
     .then(comment => dispatch(updateComment(comment)))
 
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+
 export const updateComment = (comment) => ({
   type: UPDATE_COMMENT,
   comment

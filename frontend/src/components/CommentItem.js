@@ -47,11 +47,11 @@ class CommentItem extends Component {
     })
   }
 
-
   renderDeleteBtn(){
     const {comment} = this.props
-    if(this.state.readyToDelete){
-      return(
+    const {readyToDelete} =  this.state
+    return(
+      readyToDelete ?
         <div className="btn-group">
           <button type="button"
             className= 'btn btn-sm btn-danger'
@@ -59,14 +59,11 @@ class CommentItem extends Component {
           <button onClick={() => this.onDeleteComment(comment.id)} type="button" className="btn btn-sm btn-danger">Yes</button>
           <button onClick={() => this.setState({readyToDelete:false})} type="button" className="btn btn-sm btn-danger">No</button>
         </div>
-      )
-    }else{
-      return(
-      <button type="button"
+      :
+        <button type="button"
         className= 'btn btn-sm btn-light'
         onClick={() => this.onDeleteComment(comment.id)}>Delete</button>
-      )
-    }
+    )
   }
   renderBody(){
     const {comment} = this.props
@@ -100,7 +97,6 @@ class CommentItem extends Component {
     return(
       <div>
         <hr/>
-
         <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("DD MMM YYYY")}</p>
         {this.renderBody()}
         <div className="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>

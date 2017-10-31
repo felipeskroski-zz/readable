@@ -21,10 +21,11 @@ class PostItem extends Component {
     }
   }
 
-  renderDeleteBtn(){
+  renderDeleteBtn = () => {
     const {post} =  this.props
-    if(this.state.readyToDelete){
-      return(
+    const {readyToDelete} =  this.state
+    return(
+      readyToDelete ?
         <div className="btn-group">
           <button type="button"
             className= 'btn btn-sm btn-danger'
@@ -32,14 +33,11 @@ class PostItem extends Component {
           <button onClick={() => this.deletePost(post.id)} type="button" class="btn btn-sm btn-danger">Yes</button>
           <button onClick={() => this.setState({readyToDelete:false})} type="button" class="btn btn-sm btn-danger">No</button>
         </div>
-      )
-    }else{
-      return(
-      <button type="button"
+      :
+        <button type="button"
         className= 'btn btn-sm btn-light'
         onClick={() => this.deletePost(post.id)}>Delete</button>
-      )
-    }
+    )
   }
 
   render(){
