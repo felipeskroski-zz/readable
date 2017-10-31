@@ -9,9 +9,9 @@ class PostItem extends Component {
     readyToDelete: false,
   }
   deletePost = id => {
-    const {history, removePost} = this.props
+    const {history, fetchDeletePost} = this.props
     if(this.state.readyToDelete){
-      removePost(id)
+      fetchDeletePost(id)
       //Redirects to Home after deleting post.
       this.setState({readyToDelete: false})
       history && history.push("/")
@@ -41,18 +41,18 @@ class PostItem extends Component {
   }
 
   render(){
-    const { post, vote } = this.props
+    const { post, fetchVotePost } = this.props
     return(
       <div className='post-item'>
         <Link to={`/${post.category}/${post.id}`}><h3>{post.title}</h3></Link>
         <p className='text-secondary'>Author: <strong>{post.author}</strong> | {post.commentCount} comments | {moment(post.timestamp).format("DD MMM YYYY")}</p>
         <p>{post.body}</p>
         <div className="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>
-          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(post.id, 'upVote')}>↑</a>
+          <a href='#!' className="btn btn-sm btn-light" onClick={() => fetchVotePost(post.id, 'upVote')}>↑</a>
           <button type="button" className="btn btn-sm btn-light">
              {post.voteScore} votes
           </button>
-          <a href='#!' className="btn btn-sm btn-light" onClick={() => vote(post.id, 'downVote')}>↓</a>
+          <a href='#!' className="btn btn-sm btn-light" onClick={() => fetchVotePost(post.id, 'downVote')}>↓</a>
         </div>
 
         <div className="btn-group">
@@ -72,14 +72,4 @@ function mapStateToProps ({ posts }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    vote: (id, option) => dispatch(fetchVotePost(id, option)),
-    removePost: id => dispatch(fetchDeletePost(id)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostItem)
+export default connect(mapStateToProps, { fetchVotePost, fetchDeletePost })(PostItem)

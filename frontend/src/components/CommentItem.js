@@ -11,7 +11,7 @@ class CommentItem extends Component {
   }
   //Submits post
   handleSubmit = e => {
-    const {updateComment} = this.props
+    const {fetchUpdateComment} = this.props
     const {comment} = this.props
     const { body } = this.state
     e.preventDefault()
@@ -19,14 +19,14 @@ class CommentItem extends Component {
       body,
     };
     //Dispatches action with data to update comment
-    updateComment(comment.id, data)
+    fetchUpdateComment(comment.id, data)
 
     this.setState({editMode: false})
   }
   onDeleteComment = id => {
-    const {removeComment} = this.props
+    const {deleteComment} = this.props
     if(this.state.readyToDelete){
-      removeComment(id)
+      deleteComment(id)
     }else{
       this.setState({readyToDelete: true})
     }
@@ -35,6 +35,12 @@ class CommentItem extends Component {
     const {comment} = this.props
     e.preventDefault()
     this.setState({editMode: this.state.editMode ? false : true, body: comment.body})
+  }
+
+  onVoteComment = (e, id, option) =>{
+    const {fetchVoteComment} = this.props
+    e.preventDefault()
+    fetchVoteComment(id, option)
   }
 
   handleChange = e => {
@@ -93,18 +99,18 @@ class CommentItem extends Component {
     }
   }
   render(){
-    const {comment, vote} = this.props
+    const {comment, fetchVoteComment} = this.props
     return(
       <div>
         <hr/>
         <p className='text-secondary'>Author: <strong>{comment.author}</strong> | {moment(comment.timestamp).format("DD MMM YYYY")}</p>
         {this.renderBody()}
         <div className="btn-group" role="group" aria-label="votes" style={{marginRight:20}}>
-          <a href='upvote' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'upVote')}>↑</a>
+          <a href='upvote' className="btn btn-sm btn-light" onClick={(e) => this.onVoteComment(e, comment.id, 'upVote')}>↑</a>
           <button type="button" className="btn btn-sm btn-light">
              {comment.voteScore} votes
           </button>
-          <a href='downvote' className="btn btn-sm btn-light" onClick={() => vote(comment.id, 'downVote')}>↓</a>
+          <a href='downvote' className="btn btn-sm btn-light" onClick={(e) => this.onVoteComment(e, comment.id, 'downVote')}>↓</a>
         </div>
         <div className="btn-group">
           <a href='edit' onClick={(e) => this.onEditComment(e)} className="btn btn-light btn-sm">Edit</a>
@@ -121,15 +127,7 @@ function mapStateToProps ({ comments }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    vote: (id, option) => dispatch(fetchVoteComment(id, option)),
-    removeComment: id => dispatch(deleteComment(id)),
-    updateComment: (id, data) => dispatch(fetchUpdateComment(id, data))
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { fetchVoteComment, deleteComment, fetchUpdateComment }
 )(CommentItem)
