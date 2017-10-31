@@ -30,3 +30,9 @@ App has no authentication.
 * `npm install`
 * Once all the dependencies are installed use command `npm start` to run the app.
 * App can be accessed at `localhost:3000`
+
+## Licensing
+See [LICENSE](LICENSE)
+
+## Author
+Felipe Skroski
