@@ -125,7 +125,6 @@ function mapDispatchToProps (dispatch) {
   return {
     requestPosts: () => dispatch(fetchPosts()),
     requestPost: id => dispatch(fetchPost(id)),
-    deletePost: id => dispatch(fetchDeletePost(id)),
     requestComments: id => dispatch(fetchComments(id)),
     newComment: comment => dispatch(fetchNewComment(comment)),
   }

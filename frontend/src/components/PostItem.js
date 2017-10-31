@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchVotePost } from '../actions'
+import { fetchVotePost, fetchDeletePost } from '../actions'
 import moment from 'moment'
 
 class PostItem extends Component {
@@ -9,11 +9,13 @@ class PostItem extends Component {
     readyToDelete: false,
   }
   deletePost = id => {
-    const {history, deletePost} = this.props
+    const {history, removePost} = this.props
     if(this.state.readyToDelete){
-      deletePost(id)
+      removePost(id)
       //Redirects to Home after deleting post.
-      history.push("/")
+      this.setState({readyToDelete: false})
+      history && history.push("/")
+
     }else{
       this.setState({readyToDelete: true})
     }
@@ -27,8 +29,8 @@ class PostItem extends Component {
           <button type="button"
             className= 'btn btn-sm btn-danger'
             onClick={() => this.deletePost(post.id)}>Are you sure?</button>
-          <button onClick={() => this.deletePost(post.id)} type="button" class="btn btn-danger">Yes</button>
-          <button onClick={() => this.setState({readyToDelete:false})} type="button" class="btn btn-danger">No</button>
+          <button onClick={() => this.deletePost(post.id)} type="button" class="btn btn-sm btn-danger">Yes</button>
+          <button onClick={() => this.setState({readyToDelete:false})} type="button" class="btn btn-sm btn-danger">No</button>
         </div>
       )
     }else{
@@ -75,6 +77,7 @@ function mapStateToProps ({ posts }) {
 function mapDispatchToProps (dispatch) {
   return {
     vote: (id, option) => dispatch(fetchVotePost(id, option)),
+    removePost: id => dispatch(fetchDeletePost(id)),
   }
 }
 
