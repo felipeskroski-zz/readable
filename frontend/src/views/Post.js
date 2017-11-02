@@ -63,7 +63,7 @@ class Post extends Component {
     console.log('post view')
     console.log(selectedPost)
     if(selectedPost){
-      if(selectedPost.id == undefined){
+      if(selectedPost.id === undefined){
         return(
           <NotFound />
         )

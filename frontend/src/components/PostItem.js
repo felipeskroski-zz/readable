@@ -14,7 +14,7 @@ class PostItem extends Component {
       fetchDeletePost(id)
       //Redirects to Home after deleting post.
       this.setState({readyToDelete: false})
-      history && history.push("/")
+      history ? history.push("/") : window.location.href = "/";
 
     }else{
       this.setState({readyToDelete: true})
@@ -30,8 +30,8 @@ class PostItem extends Component {
           <button type="button"
             className= 'btn btn-sm btn-danger'
             onClick={() => this.deletePost(post.id)}>Are you sure?</button>
-          <button onClick={() => this.deletePost(post.id)} type="button" class="btn btn-sm btn-danger">Yes</button>
-          <button onClick={() => this.setState({readyToDelete:false})} type="button" class="btn btn-sm btn-danger">No</button>
+          <button onClick={() => this.deletePost(post.id)} type="button" className="btn btn-sm btn-danger">Yes</button>
+          <button onClick={() => this.setState({readyToDelete:false})} type="button" className="btn btn-sm btn-danger">No</button>
         </div>
       :
         <button type="button"
@@ -42,6 +42,7 @@ class PostItem extends Component {
 
   render(){
     const { post, fetchVotePost } = this.props
+    console.log(this.props)
     return(
       <div className='post-item'>
         <Link to={`/${post.category}/${post.id}`}><h3>{post.title}</h3></Link>
