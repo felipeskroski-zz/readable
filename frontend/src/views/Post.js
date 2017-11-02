@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchPost, fetchDeletePost, fetchComments, fetchPosts, fetchNewComment } from '../actions'
 import PostItem from '../components/PostItem'
 import CommentItem from '../components/CommentItem'
+import NotFound from '../components/NotFound'
 import uuidv1 from "uuid/v1"
 
 class Post extends Component {
@@ -60,7 +61,13 @@ class Post extends Component {
     const {selectedPost} =  this.props.selectedPost
     const {comments} = this.props.comments
     console.log('post view')
+    console.log(selectedPost)
     if(selectedPost){
+      if(selectedPost.id == undefined){
+        return(
+          <NotFound />
+        )
+      }
       return(
         <div >
           <Link to='/' >← Back</Link>
